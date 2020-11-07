@@ -1,6 +1,6 @@
 {
     "name": "@za-build/project-react",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "react构建脚手架",
     "scripts": {
         "dev": "webpack-dev-server --inline --color --host 0.0.0.0 --disable-host-check --config build/webpack.dev.conf.js",
@@ -61,6 +61,7 @@
         "css-loader": "^0.28.4",
         "css-modules-typescript-loader": "4.0.0",
         "cssnano": "^3.10.0",
+        "autoprefixer": "9.6.5",
         "eslint": "^7.10.0",
         "eslint-config-airbnb": "18.0.1",
         "eslint-config-prettier": "6.5.0",
