@@ -1,0 +1,28 @@
+{
+    "sourcemapName": "zhenaicom.template",
+    "alias": {},
+    "entryPage": "index.tsx",
+    "outputPath": "dist",
+    "eslintSwitch": false,
+    "eslintignore": [
+        "dist"
+    ],
+    "copyStatic": [
+        {
+            "from": "",
+            "to": ""
+        }
+    ],
+    "dev": {
+        "host": "localhost",
+        "port": "8080",
+        "proxyTable": {
+        },
+        "devtool": "source-map",
+        "publicPath": "/"
+    },
+    "build": {
+        "devtool": "nosources-source-map",
+        "publicPath": "/"
+    }
+}
