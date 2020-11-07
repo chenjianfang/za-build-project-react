@@ -11,69 +11,6 @@ exports.assetsPath = function (_path) {
     return path.posix.join(assetsSubDirectory, _path);
 };
 
-exports.cssLoaders = function (options) {
-    options = options || {};
-
-    const cssLoader = {
-        loader: 'css-loader',
-        options: {
-            sourceMap: options.sourceMap
-        }
-    };
-
-    var postcssLoader = {
-        loader: 'postcss-loader',
-        options: {
-            sourceMap: options.sourceMap
-        }
-    };
-
-    const cssModule = 'css-modules-typescript-loader';
-
-    function generateLoaders(loader, loaderOptions) {
-        const initCssLoader = [];
-        if (process.env.NODE_ENV === 'production') {
-            initCssLoader.push(MiniCssExtractPlugin.loader);
-        } else {
-            initCssLoader.push('style-loader')
-        }
-        initCssLoader.push(cssLoader, cssModule);
-        if (options.usePostCSS) {
-            initCssLoader.push(postcssLoader);
-        }
-        if (loader) {
-            initCssLoader.push({
-                loader: loader + '-loader',
-                options: Object.assign({}, loaderOptions, {
-                    sourceMap: options.sourceMap
-                })
-            });
-        }
-        return initCssLoader;
-    }
-
-    return {
-        css: generateLoaders(),
-        postcss: generateLoaders(),
-        less: generateLoaders('less'),
-        sass: generateLoaders('sass', {indentedSyntax: true}),
-        scss: generateLoaders('sass'),
-    };
-};
-
-exports.styleLoaders = function (options) {
-    const output = [];
-    const loaders = exports.cssLoaders(options);
-    for (const extension in loaders) {
-        const loader = loaders[extension];
-        output.push({
-            test: new RegExp('\\.' + extension + '$'),
-            use: loader
-        });
-    }
-    return output;
-};
-
 exports.createNotifierCallback = function () {
     const notifier = require('node-notifier');
 

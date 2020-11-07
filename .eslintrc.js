@@ -25,8 +25,8 @@ const eslintrc = {
         },
     ],
     rules: {
-        "react-hooks/rules-of-hooks": 'error',
-        "react-hooks/exhaustive-deps": 'warn',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
         camelcase: 0,
         'react/jsx-one-expression-per-line': 0,
         'react/prop-types': 0,
@@ -63,7 +63,7 @@ const eslintrc = {
         'react/no-did-update-set-state': 0, // TODO: remove later
         'react/require-default-props': 0,
         'react/default-props-match-prop-types': 0,
-        'import/no-cycle': 0,
+        'import/no-cycle': 'error',
         'react/no-find-dom-node': 0,
         'no-underscore-dangle': 0,
         'react/sort-comp': 0,
@@ -86,7 +86,7 @@ const eslintrc = {
         'import/prefer-default-export': 0,
         'import/no-unresolved': 0,
         'react/jsx-indent-props': 0,
-        "indent": 0,
+        indent: 0,
         'no-tabs': 0,
         'react/no-array-index-key': 0,
         'linebreak-style': 0,
@@ -100,6 +100,5 @@ const eslintrc = {
         gtag: true,
     },
 };
-
 
 module.exports = eslintrc;

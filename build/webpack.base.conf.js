@@ -1,5 +1,6 @@
 'use strict';
 var webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const utils = require('./utils');
 
 const extraLoader = [];
@@ -27,7 +28,26 @@ module.exports = {
     },
     module: {
         rules: [
-            ...utils.styleLoaders({ sourceMap: false, usePostCSS: true }),
+            {
+                test: /\.css$/,
+                use: [
+                    process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+                    'css-modules-typescript-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: false
+                        }
+                    }
+                ]
+            },
+
             ...extraLoader,
             {
                 test: /\.js$/,
