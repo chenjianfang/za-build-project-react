@@ -1,5 +1,6 @@
+@import "common/variable.css";
+
 .container{
-    background: red;
-    color: #c000;
+    background: $redColor;
     font-size: 75px;
 }
