@@ -1,6 +1,6 @@
 {
     "name": "@za-build/project-react",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "react构建脚手架",
     "scripts": {
         "dev": "webpack-dev-server --inline --color --host 0.0.0.0 --disable-host-check --config build/webpack.dev.conf.js",
@@ -73,7 +73,9 @@
         "optimize-css-assets-webpack-plugin": "^3.0.0",
         "portfinder": "^1.0.28",
         "postcss-loader": "^2.0.6",
+        "postcss-preset-env": "^6.7.0",
         "postcss-px2rem": "^0.3.0",
+        "precss": "^4.0.0",
         "react": "17.0.0",
         "react-css-modules": "4.7.11",
         "react-dom": "16.10.2",
