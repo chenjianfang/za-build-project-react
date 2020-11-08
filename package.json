@@ -1,6 +1,6 @@
 {
     "name": "@za-build/project-react",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "react构建脚手架",
     "scripts": {
         "dev": "webpack-dev-server --inline --color --host 0.0.0.0 --disable-host-check --config build/webpack.dev.conf.js",
@@ -27,15 +27,8 @@
         "build",
         "config",
         "shell",
-        ".editorconfig",
-        ".eslintrc.js",
         ".gitignore",
-        ".postcssrc.js",
-        "babel.config.json",
-        "build.config.json",
-        "declareModule.d.ts",
         "package.json",
-        "tsconfig.json",
         "readme.md"
     ],
     "dependencies": {
@@ -50,8 +43,6 @@
         "@types/react-dom": "^16.9.9",
         "@typescript-eslint/eslint-plugin": "2.6.0",
         "@typescript-eslint/parser": "2.6.0",
-        "autoprefixer": "9.6.5",
-        "autoprefixer-loader": "^3.2.0",
         "awesome-typescript-loader": "5.2.1",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.1.0",
