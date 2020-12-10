@@ -1,4 +1,3 @@
-'use strict';
 const merge = require('webpack-merge');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
@@ -18,7 +17,12 @@ copyStatic.forEach(({ from, to }) => {
 });
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-    mode: "development",
+    mode: 'development',
+    resolve: {
+        alias: {
+            'react-dom': '@hot-loader/react-dom',
+        },
+    },
     entry: utils.createEntries(),
     output: {
         path: utils.getConfigCwdPath('outputPath'),
@@ -43,12 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': require('../config/dev.env')
-        }),
-        new webpack.NoEmitOnErrorsPlugin(),
-
-        // HRM
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
+        })
     ]
 });
 

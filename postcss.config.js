@@ -6,7 +6,7 @@ module.exports = {
     plugins: [
         require('postcss-import')({
             root: projectCwd,
-            path: ['./src/common']
+            path: ['./src']
         }),
         require('postcss-px2rem')({
             remUnit: 75

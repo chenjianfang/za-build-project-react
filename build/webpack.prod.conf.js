@@ -1,13 +1,13 @@
 /* 生产构建 --page=值 值只能有一个页面 */
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { filterArg } = require('./core');
-const utils = require('./utils');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const utils = require('./utils');
+const { filterArg } = require('./core');
 
 const buildPage = filterArg('page');
 const sourcemap = filterArg('sourcemap');
@@ -27,12 +27,12 @@ if (!Object.keys(pageEntryDir).includes(buildPage)) {
 console.log('buildPage: ', buildPage);
 const name = buildPage.replace(/\//g, '_');
 const webpackConfig = merge(baseWebpackConfig, {
-    mode: "production",
+    mode: 'production',
     entry: utils.createEntries(),
     devtool: sourcemap ? utils.getBuildConfig('build').devtool : false,
     output: {
         path: `${utils.getConfigCwdPath('outputPath')}/${buildPage}`,
-        publicPath: `${utils.getBuildConfig("build").publicPath}${buildPage}/`,
+        publicPath: `${utils.getBuildConfig('build').publicPath}${buildPage}/`,
         filename: `js/${name}.[contenthash].js`,
     },
     optimization: {
@@ -47,15 +47,15 @@ const webpackConfig = merge(baseWebpackConfig, {
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    filename: "js/[name].[contenthash].js",
+                    filename: 'js/[name].[contenthash].js',
                     name(module) {
-                        const moduleFileName = module.identifier().split('/').reduceRight(item => item);
+                        const moduleFileName = module.identifier().split('/').reduceRight((item) => item);
                         if (/.js$/.test(moduleFileName)) {
                             return 'vendors';
                         }
                         return false;
                     },
-                    chunks: "initial"
+                    chunks: 'initial'
                 },
             },
         }

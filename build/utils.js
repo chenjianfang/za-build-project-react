@@ -1,10 +1,9 @@
 const fs = require('fs');
 const chalk = require('chalk');
 const path = require('path');
-const core = require('./core');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
+const core = require('./core');
 
 exports.assetsPath = function (_path) {
     const assetsSubDirectory = '';
@@ -23,7 +22,7 @@ exports.createNotifierCallback = function () {
         const filename = error.file && error.file.split('!').pop();
         notifier.notify({
             title: '',
-            message: severity + ': ' + error.name,
+            message: `${severity}: ${error.name}`,
             subtitle: filename || '',
             icon: path.join(__dirname, 'logo.png')
         });
@@ -36,12 +35,12 @@ exports.createNotifierCallback = function () {
 let cachePageEntry = {};
 function getPages() {
     if (Object.keys(cachePageEntry).length) return cachePageEntry;
-    let pageEntryAll = {};
+    const pageEntryAll = {};
     let pageEntry = {};
     const pageName = core.filterArg('page');
     const pagesPath = core.cwdPath('src/pages');
-    let dirs = fs.readdirSync(pagesPath);
-    let pages = dirs.filter(item => item !== '.DS_Store');
+    const dirs = fs.readdirSync(pagesPath);
+    const pages = dirs.filter((item) => item !== '.DS_Store');
 
     pages.forEach((page) => {
         let deepPagesList = [];
@@ -49,7 +48,7 @@ function getPages() {
         const deepPagesStatus = core.checkFileExistsSync(deepPagesPath);
         if (deepPagesStatus) {
             deepPagesList = fs.readdirSync(deepPagesPath);
-            deepPagesList = deepPagesList.filter(item => item !== '.DS_Store');
+            deepPagesList = deepPagesList.filter((item) => item !== '.DS_Store');
             deepPagesList.forEach((dp) => {
                 pageEntryAll[`${page}/${dp}`] = path.join(deepPagesPath, dp);
             });
@@ -65,11 +64,10 @@ function getPages() {
                 pageEntry[item] = pageEntryAll[item];
             }
         });
-    }
-
-    if (!Object.keys(pageEntry).length) {
+    } else {
         pageEntry = pageEntryAll;
     }
+
     cachePageEntry = pageEntry;
     return pageEntry;
 }
@@ -79,8 +77,9 @@ exports.getPages = getPages;
  * 初始化入口文件
  */
 exports.createEntries = function () {
-    var pageEntryDir = getPages();
-    let entryObject = {};
+    const pageEntryDir = getPages();
+    const entryObject = {};
+
     Object.entries(pageEntryDir).forEach(([key, value]) => {
         const entryFile = path.join(value, exports.getBuildConfig('entryPage'));
         if (fs.existsSync(entryFile)) {
@@ -94,8 +93,8 @@ exports.createEntries = function () {
 };
 
 exports.createHtmlPackPlugins = function () {
-    var pageEntryDir = getPages();
-    let htmlPluginArray = [];
+    const pageEntryDir = getPages();
+    const htmlPluginArray = [];
 
     Object.entries(pageEntryDir).forEach(([key, value]) => {
         const templateFile = path.join(value, 'index.ejs');
@@ -120,15 +119,15 @@ exports.createHtmlPackPlugins = function () {
     return htmlPluginArray;
 };
 
-exports.createManifest = function(buildPage) {
+exports.createManifest = function (buildPage) {
     return new ManifestPlugin({
         fileName: `../${buildPage}_manifest.json`,
         publicPath: `${buildPage}/`,
         filter({ name }) {
             return name.includes('.js');
         }
-    })
-}
+    });
+};
 
 // 获取build-config配置
 let buildConfig;

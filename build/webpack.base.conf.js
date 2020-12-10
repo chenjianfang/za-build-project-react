@@ -1,6 +1,5 @@
-'use strict';
-var webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const utils = require('./utils');
 
 const extraLoader = [];
@@ -52,7 +51,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader"
+                loader: 'babel-loader'
             },
             {
                 test: /\.tsx?$/,

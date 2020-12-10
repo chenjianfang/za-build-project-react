@@ -24,5 +24,4 @@ try {
 
 shell.cd(entryPath);
 
-console.log("entryPath: ", entryPath);
 shell.exec(`npm run dev ${process.argv.slice(2).join(' ')} --cwd=${cwd}`);
